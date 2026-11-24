@@ -1,0 +1,101 @@
+{
+  "note": "HSK 3.0 reading part 2 style: a passage cut into five whole paragraphs, shuffled A–E. 'paras' are listed in the CORRECT order; the app shuffles them. clue types: open (opener), link (linking word), ref (back-reference), time, gen (general→specific / conclusion), qa (question→answer), cause (cause→effect).",
+  "items": [
+    {"id":"o5-01","level":5,"genre":"记叙文","title":"一家小书店","paras":[
+      {"t":"在城市的一条老街上，有一家开了二十多年的小书店。店面不大，却总是坐满了看书的人。","clue":["在城市的一条老街上"],"type":"open","why":"介绍地点和书店，没有任何指代，适合开头。|Sets the scene; nothing points back, so it opens."},
+      {"t":"店主姓林，今年六十多岁。他有一个特别的规定：来店里的人可以随便看书，不买也没关系。","clue":["店主","规定"],"type":"ref","why":"“店主”承接上段的书店，并第一次提出“规定”。|Introduces the owner of the shop just mentioned, and the rule."},
+      {"t":"刚开始，不少朋友劝他改掉这个规定。他们觉得，这样下去书店迟早要关门。林老板却笑着说：“看书的人多了，买书的人自然也会多。”","clue":["刚开始","这个规定"],"type":"ref","why":"“这个规定”指前面提到的规定，不能开头。|“这个规定” points back to a rule already introduced."},
+      {"t":"事实证明，他是对的。许多当年在这里免费看书的学生，长大以后都成了书店的老顾客，有的还专门带着自己的孩子回来。","clue":["事实证明，他是对的"],"type":"ref","why":"回应上一段林老板说的话，必须放在他说话之后。|Answers the owner's claim, so it comes right after it."},
+      {"t":"如今，网上买书越来越方便，很多实体书店都关了门，这家小书店却一直开着。在附近居民眼里，它早已不只是一家书店，更像是大家共同的“书房”。","clue":["如今"],"type":"time","why":"“如今”把时间拉到现在，又总结书店的意义，放最后。|Jumps to the present and sums up: closing paragraph."}]},
+    {"id":"o5-02","level":5,"genre":"应用文","title":"关于春季学期选课的通知","paras":[
+      {"t":"各位同学：新学期即将开始，为了保证选课工作顺利进行，现将有关安排通知如下。","clue":["各位同学","现将有关安排通知如下"],"type":"open","why":"通知的称呼和开场白，一定在最前面。|Salutation and opening formula of a notice."},
+      {"t":"本次选课分两轮进行。第一轮从1月6日开始，主要选择专业必修课；第二轮从1月13日开始，同学们可以根据个人兴趣选择选修课。","clue":["本次选课分两轮进行"],"type":"gen","why":"先说时间安排这个总体信息。|States the overall schedule first."},
+      {"t":"所有课程都要在学校教务系统中选择。登录以后，请先核对个人信息，再按照系统提示完成操作。需要注意的是，每门选修课都有人数限制，选满为止。","clue":["所有课程","需要注意的是"],"type":"gen","why":"说明怎么选课，在时间安排之后、退选之前。|How to choose: after the schedule, before changing courses."},
+      {"t":"选课结束后，如果因为时间冲突等原因需要更换课程，可以在第二轮结束前办理退选。退选以后，名额会重新开放，其他同学可以补选。","clue":["选课结束后","退选"],"type":"time","why":"“选课结束后”说明是选完以后的事，不能放在前面。|“After choosing” has to follow the choosing steps."},
+      {"t":"如对以上安排有任何疑问，请在工作日联系教务处。祝大家新学期学习顺利！","clue":["以上安排","祝大家"],"type":"gen","why":"“以上安排”指前面所有内容，加上祝福语，是结尾。|“以上” refers to everything above; a sign-off goes last."}]},
+    {"id":"o5-03","level":5,"genre":"说明文","title":"为什么要午睡","paras":[
+      {"t":"在中国，很多人都有午睡的习惯。吃完午饭以后，躺下来睡二三十分钟，下午工作起来就特别有精神。","clue":["在中国，很多人都有午睡的习惯"],"type":"open","why":"提出话题“午睡”，是总起。|Introduces the topic in general terms."},
+      {"t":"那么，午睡真的对身体有好处吗？科学家的研究给出了肯定的回答。","clue":["那么","真的…吗"],"type":"qa","why":"用问题引出下文，问题后面要有回答。|Asks a question; the next paragraph must answer it."},
+      {"t":"研究发现，人的身体在下午一点到三点之间会自然地感到疲劳。这时候短暂地休息一下，不但能恢复体力，还能提高记忆力和注意力。","clue":["研究发现"],"type":"qa","why":"具体回答上面的问题，说明好处。|The concrete answer to the question above."},
+      {"t":"不过，午睡的时间并不是越长越好。如果超过一个小时，人反而会觉得头昏脑涨，晚上也可能睡不着。","clue":["不过","午睡的时间"],"type":"link","why":"“不过”转折，补充午睡需要注意的地方。|Contrast: adds a limit after the benefits."},
+      {"t":"总的来说，只要掌握好时间，午睡就是一种简单又有效的休息方式。专家建议，午睡最好控制在三十分钟以内。","clue":["总的来说"],"type":"gen","why":"“总的来说”是总结，放最后。|Conclusion marker: goes last."}]},
+    {"id":"o5-04","level":5,"genre":"记叙文","title":"迟到的感谢信","paras":[
+      {"t":"十年前的一个冬天，我第一次一个人坐火车去外地上大学。","clue":["十年前的一个冬天"],"type":"time","why":"交代时间和事件开始，没有指代。|Time setting at the very start."},
+      {"t":"车开了没多久，我就发现钱包不见了。车票、学生证和这个月的生活费全在里面，我急得差点儿哭出来。","clue":["车开了没多久"],"type":"time","why":"“车开了”接着上段坐火车，出现问题。|Follows boarding the train; the problem appears."},
+      {"t":"坐在对面的一位大叔看出了我的着急，他什么也没问，就塞给我两百块钱，还帮我跟列车员说明了情况。","clue":["坐在对面的一位大叔","我的着急"],"type":"ref","why":"“我的着急”承接上段丢钱包的事。|“My panic” refers back to losing the wallet."},
+      {"t":"下车的时候，我想留下他的电话，以后好还钱。他却摆摆手说：“不用了，以后你遇到需要帮助的人，也帮一把就行。”","clue":["下车的时候","还钱"],"type":"time","why":"“下车”在旅程最后，“还钱”指他给的钱。|Getting off ends the trip; “paying back” refers to his money."},
+      {"t":"这些年，我一直记着他的话。每当在路上看到有困难的人，我都会停下来帮一帮。我想，这就是我能写给那位大叔的、最好的感谢信。","clue":["这些年","他的话"],"type":"ref","why":"“这些年”回到现在，“他的话”指上段大叔说的话。|Back to the present; “his words” points to the last paragraph."}]},
+    {"id":"o5-05","level":5,"genre":"说明文","title":"城市里的共享单车","paras":[
+      {"t":"走在中国的城市街头，你会发现路边整齐地停着各种颜色的自行车，这就是共享单车。","clue":["这就是共享单车"],"type":"open","why":"引出并解释话题。|Introduces and names the topic."},
+      {"t":"使用共享单车非常简单。打开手机软件扫一下车上的二维码，车锁就会自动打开；骑到目的地以后，把车停好、锁上，系统就会自动付费。","clue":["使用共享单车非常简单"],"type":"gen","why":"先说怎么用。|First, how it works."},
+      {"t":"由于价格便宜、使用方便，共享单车很快就受到了人们的欢迎，特别是解决了从地铁站到家这“最后一公里”的问题。","clue":["由于","受到了人们的欢迎"],"type":"cause","why":"说明为什么受欢迎，是前面方便的结果。|Effect of being easy and cheap: popularity."},
+      {"t":"然而，随着单车数量越来越多，新的问题也出现了。有些人乱停乱放，不但影响交通，也让城市变得不整齐。","clue":["然而","新的问题"],"type":"link","why":"“然而”转折，从好处转到问题。|Contrast: from benefits to problems."},
+      {"t":"为了解决这些问题，很多城市划出了专门的停车区域，并要求用户把车停在规定的地方，否则就要多付费用。","clue":["为了解决这些问题"],"type":"ref","why":"“这些问题”指上段提到的问题。|“These problems” refers to the paragraph before."}]},
+    {"id":"o5-06","level":5,"genre":"议论文","title":"慢一点也没关系","paras":[
+      {"t":"现代人的生活节奏越来越快。走路要快，吃饭要快，就连看电影，很多人也习惯用两倍的速度。","clue":["现代人的生活节奏越来越快"],"type":"open","why":"描述普遍现象，是开头。|Describes a general trend: the opener."},
+      {"t":"快，确实给我们带来了效率。可是，一直处在快节奏中，人很容易感到疲惫和焦虑，也常常忽视了身边美好的东西。","clue":["快，确实","可是"],"type":"link","why":"先承认“快”的好处，再用“可是”说问题。|Concedes, then “可是” raises the problem."},
+      {"t":"其实，偶尔让自己慢下来，反而能把事情做得更好。比如，认真吃一顿饭、安静地读一本书、和家人散散步，都能让人重新找回精力。","clue":["其实","比如"],"type":"gen","why":"提出观点并举例，在问题之后。|States the view with examples, after the problem."},
+      {"t":"我的一位朋友以前每天加班到很晚，身体越来越差。后来他规定自己周末不看工作消息，结果不但身体好了，工作效率也提高了。","clue":["我的一位朋友"],"type":"gen","why":"具体的例子支持上面的观点。|A personal example backing the view."},
+      {"t":"所以，在这个追求速度的时代，我们不妨学会给生活按一下“暂停键”。慢一点，也没关系。","clue":["所以"],"type":"gen","why":"“所以”引出结论，呼应题目，放最后。|“所以” draws the conclusion; echoes the title."}]},
+    {"id":"o5-07","level":5,"genre":"记叙文","title":"爷爷的菜园","paras":[
+      {"t":"爷爷退休以后，在楼下的空地上开了一块小菜园。","clue":["爷爷退休以后"],"type":"open","why":"人物和事件第一次出现。|First mention of the person and the garden."},
+      {"t":"每天天刚亮，他就提着水桶去浇水、拔草。一年四季，菜园里总是绿油油的，西红柿、黄瓜、辣椒应有尽有。","clue":["每天天刚亮"],"type":"gen","why":"具体描写爷爷怎么种菜。|Details of how he tends it."},
+      {"t":"菜多得吃不完，爷爷就分给邻居们。慢慢地，楼里的人都认识了他，有人还专门来向他请教种菜的方法。","clue":["菜多得吃不完"],"type":"cause","why":"菜长得好的结果：分给邻居。|Result of the good harvest: sharing."},
+      {"t":"有一年夏天，爷爷生病住院了。没想到，邻居们自发地轮流帮他照顾菜园，一棵菜也没让它干死。","clue":["有一年夏天","没想到"],"type":"time","why":"转折事件，必须在大家认识他之后才合理。|Neighbours helping only makes sense after they know him."},
+      {"t":"出院那天，爷爷看着满园的蔬菜，眼睛湿润了。他说，这块小菜园给他的，比他给它的多得多。","clue":["出院那天","这块小菜园"],"type":"time","why":"“出院”接上段“住院”，是结尾。|“Leaving hospital” follows being admitted: ending."}]},
+    {"id":"o5-08","level":5,"genre":"说明文","title":"熊猫为什么爱吃竹子","paras":[
+      {"t":"大熊猫是中国特有的动物，它们最大的特点之一，就是几乎只吃竹子。","clue":["大熊猫是中国特有的动物"],"type":"open","why":"介绍对象和特点，开头。|Introduces the animal and its trait."},
+      {"t":"有意思的是，从身体结构来看，熊猫其实属于食肉动物，它们的消化系统并不适合消化竹子。","clue":["有意思的是","其实"],"type":"link","why":"提出一个矛盾，引起下文的解释。|Raises a puzzle that the next paragraphs explain."},
+      {"t":"那么，熊猫为什么还要吃竹子呢？科学家认为，这和它们的生活环境有关。","clue":["那么","为什么"],"type":"qa","why":"根据上段的矛盾提出问题。|Asks the question raised by the puzzle."},
+      {"t":"很久以前，熊猫生活的山区里，竹子到处都是，一年四季都不缺；而其他食物却很难找到。为了生存，熊猫慢慢地适应了以竹子为食。","clue":["很久以前","为了生存"],"type":"qa","why":"回答上面的问题。|Answers the question."},
+      {"t":"正因为如此，一只成年熊猫每天要花十几个小时吃东西，吃下去的竹子有十多公斤，才能获得足够的营养。","clue":["正因为如此"],"type":"cause","why":"“正因为如此”指前面的原因，说明结果。|“Precisely because of this” points back to the cause."}]},
+    {"id":"o5-09","level":5,"genre":"应用文","title":"图书馆闭馆通知","paras":[
+      {"t":"尊敬的读者朋友：","clue":["尊敬的读者朋友"],"type":"open","why":"称呼，放最前面。|The salutation comes first."},
+      {"t":"为了给大家提供更好的阅读环境，本馆将于12月15日至12月31日进行内部装修，装修期间暂停对外开放。","clue":["为了","本馆将于"],"type":"gen","why":"说明主要事项：闭馆时间和原因。|The main point: closing dates and why."},
+      {"t":"闭馆期间，借阅的图书可以投放到大门口的自助还书箱，还书时间将自动延长，不会产生超期费用。","clue":["闭馆期间"],"type":"ref","why":"“闭馆期间”承接上段的闭馆安排。|Refers back to the closure just announced."},
+      {"t":"此外，电子图书和数据库仍然可以正常使用，读者可以登录图书馆网站在线阅读。","clue":["此外"],"type":"link","why":"“此外”补充其他服务。|“此外” adds further information."},
+      {"t":"装修给大家带来的不便，敬请谅解。感谢大家一直以来的支持！","clue":["敬请谅解","感谢"],"type":"gen","why":"道歉和感谢是通知的结尾。|Apology and thanks close a notice."}]},
+    {"id":"o5-10","level":5,"genre":"议论文","title":"兴趣是最好的老师","paras":[
+      {"t":"爱因斯坦说过：“兴趣是最好的老师。”这句话说明了兴趣在学习中的重要作用。","clue":["这句话"],"type":"open","why":"引用名言提出观点，开头。|Opens with a quotation and the thesis."},
+      {"t":"一个人对某件事感兴趣，就会主动去了解它、研究它，即使遇到困难也不会轻易放弃。","clue":["一个人对某件事感兴趣"],"type":"gen","why":"解释为什么兴趣重要。|Explains why interest matters."},
+      {"t":"相反，如果只是被别人逼着去学，就算花了很多时间，效果也往往不理想。","clue":["相反"],"type":"link","why":"“相反”从反面说明，在正面说明之后。|“On the contrary” follows the positive case."},
+      {"t":"那么，怎样培养兴趣呢？首先，可以从简单的、和生活有关的内容开始；其次，要及时给自己一些小小的奖励，让自己体会到进步的快乐。","clue":["那么","怎样培养兴趣呢"],"type":"qa","why":"在说明重要性后，提出“怎么办”。|After why, asks how."},
+      {"t":"总之，找到了兴趣，学习就不再是负担，而会变成一种享受。","clue":["总之"],"type":"gen","why":"“总之”总结全文。|“In short”: the conclusion."}]},
+    {"id":"o5-11","level":5,"genre":"记叙文","title":"一次难忘的面试","paras":[
+      {"t":"大学毕业那年，我参加了一家大公司的面试。","clue":["大学毕业那年"],"type":"time","why":"时间和事件的开始。|Time and event set-up."},
+      {"t":"轮到我的时候，面试官没有问专业问题，而是让我把门口那把倒在地上的椅子扶起来，然后再开始回答问题。","clue":["轮到我的时候"],"type":"time","why":"面试开始后发生的事。|What happened once the interview began."},
+      {"t":"我虽然觉得奇怪，还是照做了。后来的问题都很普通，我回答得也不算特别出色。","clue":["照做了"],"type":"ref","why":"“照做”指上段面试官的要求。|“Did as told” refers to the request before."},
+      {"t":"没想到，一周以后我收到了录用通知。入职以后我才知道，那把椅子是故意放倒的，前面的十几个人都从旁边绕了过去。","clue":["没想到","那把椅子"],"type":"ref","why":"揭开结果，“那把椅子”指前面的椅子。|The reveal; “that chair” refers back."},
+      {"t":"这件事让我明白，一个人的态度，常常藏在最小的细节里。","clue":["这件事"],"type":"gen","why":"“这件事”总结全部经历，放最后。|“This experience” sums up everything: last."}]},
+    {"id":"o5-12","level":5,"genre":"说明文","title":"茶在中国","paras":[
+      {"t":"中国是茶的故乡，喝茶的历史已经有几千年了。","clue":["中国是茶的故乡"],"type":"open","why":"总起，介绍话题。|General opener."},
+      {"t":"中国的茶种类很多，按照制作方法的不同，主要可以分为绿茶、红茶、乌龙茶、白茶等几大类。","clue":["种类很多"],"type":"gen","why":"先介绍种类。|First, the types."},
+      {"t":"不同地方的人，喝茶的习惯也不一样。比如，南方人喜欢喝绿茶，北方人更爱喝花茶，而在广东，人们常常一边喝茶一边吃点心，叫做“喝早茶”。","clue":["不同地方的人","比如"],"type":"gen","why":"再说各地习惯，并举例。|Then regional habits, with examples."},
+      {"t":"除了日常饮用，茶在中国人的社交生活中也有重要的作用。客人来了，主人先泡一杯茶，表示欢迎和尊重。","clue":["除了日常饮用"],"type":"link","why":"“除了”在说完日常喝茶以后，补充社交作用。|“Besides daily drinking” must follow the habits."},
+      {"t":"可以说，茶早已成为中国文化的一部分。了解了茶，也就多了解了一点中国。","clue":["可以说"],"type":"gen","why":"“可以说”总结全文。|Summing up."}]},
+    {"id":"o4-01","level":4,"genre":"记叙文","title":"第一次做饭","paras":[
+      {"t":"上个星期六，爸爸妈妈都不在家，我决定自己做一次饭。","clue":["上个星期六"],"type":"time","why":"时间和事情的开始。|When it starts."},
+      {"t":"我打开冰箱，拿出了鸡蛋和西红柿，准备做我最爱吃的西红柿炒鸡蛋。","clue":["我打开冰箱"],"type":"time","why":"开始做饭的第一步。|The first step."},
+      {"t":"可是，因为火开得太大，鸡蛋很快就炒糊了，厨房里都是烟。","clue":["可是"],"type":"link","why":"“可是”转折，出现问题。|“But”: the problem."},
+      {"t":"我只好打电话问妈妈。她耐心地告诉我，要先用小火，再慢慢加西红柿。","clue":["只好"],"type":"cause","why":"出了问题以后的办法。|What he did because of the problem."},
+      {"t":"第二次，我终于成功了。虽然味道不如妈妈做的，但我觉得这是我吃过的最好吃的一顿饭。","clue":["第二次","终于"],"type":"time","why":"结果和感受，放最后。|Result and feeling: last."}]},
+    {"id":"o4-02","level":4,"genre":"说明文","title":"早睡早起","paras":[
+      {"t":"很多年轻人习惯晚睡，常常到半夜一两点还在玩手机。","clue":["很多年轻人"],"type":"open","why":"提出现象。|States the habit."},
+      {"t":"这样的习惯对身体很不好。睡得太晚，第二天就没有精神，时间长了还容易生病。","clue":["这样的习惯"],"type":"ref","why":"“这样的习惯”指上段的晚睡。|Refers back to staying up late."},
+      {"t":"所以，医生建议大家最好在晚上十一点以前睡觉。","clue":["所以"],"type":"cause","why":"“所以”说明根据上面的问题给出的建议。|Advice that follows from the problem."},
+      {"t":"如果睡不着，可以在睡前听听音乐或者看看书，而不要一直看手机。","clue":["如果睡不着"],"type":"gen","why":"补充具体办法。|Practical tips."},
+      {"t":"只要坚持一段时间，你就会发现，早睡早起让每一天都更有精神。","clue":["只要坚持"],"type":"gen","why":"总结好处，放最后。|Sums up the benefit."}]},
+    {"id":"o4-03","level":4,"genre":"应用文","title":"给房东的留言","paras":[
+      {"t":"王阿姨，您好！","clue":["您好"],"type":"open","why":"称呼。|Greeting."},
+      {"t":"我是住在三楼的小李。昨天晚上，我发现厨房的水管有点儿漏水。","clue":["我是住在三楼的小李"],"type":"gen","why":"先介绍自己，再说问题。|Who is writing, and the problem."},
+      {"t":"我已经把水关了，可是还不知道怎么修，所以想麻烦您找人来看一下。","clue":["已经把水关了"],"type":"ref","why":"说明对漏水做了什么，在问题之后。|What he did about the leak."},
+      {"t":"我这周白天都要上班，晚上七点以后在家。如果您方便，请提前给我打个电话。","clue":["这周白天"],"type":"gen","why":"约时间，是请求之后的安排。|Arranging a time, after the request."},
+      {"t":"给您添麻烦了，谢谢！","clue":["添麻烦了","谢谢"],"type":"gen","why":"感谢放最后。|Thanks go last."}]},
+    {"id":"o4-04","level":4,"genre":"记叙文","title":"找到的钱包","paras":[
+      {"t":"昨天下午，我在公园的椅子上发现了一个黑色的钱包。","clue":["昨天下午"],"type":"time","why":"时间、地点和事情。|Time, place, event."},
+      {"t":"打开一看，里面有一些钱、一张银行卡，还有一张写着电话号码的名片。","clue":["打开一看"],"type":"time","why":"发现钱包以后马上做的事。|Right after finding it."},
+      {"t":"我按照名片上的号码打了过去，原来钱包是一位张先生的，他正着急地到处找呢。","clue":["名片上的号码"],"type":"ref","why":"“名片”在上段出现过。|The card was mentioned above."},
+      {"t":"半个小时以后，张先生赶到了公园。拿到钱包，他一直对我说谢谢，还要给我钱。","clue":["半个小时以后"],"type":"time","why":"打电话以后的事。|After the phone call."},
+      {"t":"我笑着拒绝了。我觉得，帮助别人本来就是一件快乐的事。","clue":["拒绝了"],"type":"ref","why":"拒绝他给的钱，是结尾。|Turning down the money: ending."}]}
+  ]
+}

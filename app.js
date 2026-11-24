@@ -292,7 +292,7 @@ function vWrite() {
   const hint = it.panels && it.panels[0] ? `<details style="margin:10px 0"><summary class="small" style="cursor:pointer;font-weight:600">Hint: what happens in each picture</summary><ol class="small muted" style="padding-left:18px;margin:6px 0 0">${it.panels.map(p => `<li>${esc(p)}</li>`).join("")}</ol></details>` : "";
   return topBar("写作", `${def.label} · ${w.idx + 1}/${items.length} ${w.left != null ? `· <span class="timer" id="wtime">${fmt(w.left)}</span>` : ""}`) + `<main class="page wrap"><div class="wide">${tabs}
     <h1 style="font-size:22px">${esc(def.title)}</h1><p class="lede han" style="font-size:16px;margin-bottom:16px">${esc(def.instr)}</p>
-    <div class="split"><div>${left}${hint}</div><div>
+    <div class="split"><div>${left}${hint}${tplHTML(w.task)}</div><div>
       ${w.draft1 != null ? `<div class="h">First draft</div><div class="draft1">${esc(w.draft1)}</div><div class="h">Write it again</div>` : ""}
       <textarea class="editor" id="wtext" lang="zh-CN" aria-label="Your answer" placeholder="开始写…" ${w.task === "h4p1" ? 'style="min-height:22vh"' : ""}>${esc(w.text)}</textarea>
       <div class="count-row"><span id="wcount">${zhCount(w.text)} characters · ${punCount(w.text)} punctuation</span><span>${def.target[0]}+</span></div>
@@ -300,7 +300,16 @@ function vWrite() {
        <button class="btn ghost press" data-act="wtimer">${w.left != null ? "Stop timer" : "Timer " + def.minutes + ":00"}</button><button class="btn ghost press" data-act="wnext">Next prompt</button></div>
     </div></div></div></main>`;
 }
+function tplHTML(task) {
+  const T = C.writing.templates && C.writing.templates[task]; if (!T) return "";
+  return `<details class="tpl" ${kv("tplOpen", true) ? "open" : ""} data-tpl><summary><span class="han">写作模板</span> · ${esc(T.name)}</summary>
+    <p class="muted small" style="margin:8px 0 12px">${esc(T.idea)}</p>
+    ${T.steps.map((st, i) => `<div class="tstep"><div class="tl"><b class="han">${i + 1}. ${esc(st.label)}</b> <span class="muted small">${esc(st.en)}</span></div>${st.frames.map(f => `<div class="tf han">${esc(f)}</div>`).join("")}</div>`).join("")}
+    <ul class="small muted" style="padding-left:18px;margin:12px 0">${T.tips.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+    <button class="btn ghost sm press" data-act="wskel">${S.w && S.w.confirmSkel ? "Tap again to replace your text" : "Start from this skeleton"}</button></details>`;
+}
 after.write = () => {
+  const d = document.querySelector("[data-tpl]"); if (d) d.addEventListener("toggle", () => kvSet("tplOpen", d.open));
   const ta = $("#wtext"); if (!ta) return;
   ta.addEventListener("input", () => { S.w.text = ta.value; $("#wcount").textContent = zhCount(ta.value) + " characters · " + punCount(ta.value) + " punctuation"; });
   if (S.w.left != null) { stopTick(); tickTimer = setInterval(() => { S.w.left--; const el = $("#wtime"); if (el) el.textContent = fmt(S.w.left); if (S.w.left === 0) toast("Time's up. Finish your sentence and check it."); }, 1000); }
@@ -674,6 +683,7 @@ document.addEventListener("click", async e => {
     case "wnext": { closeSheet(); stopTick(); const items = wItems(S.w.task); newWrite(S.w.task, (S.w.idx + 1) % items.length); render(); window.scrollTo(0, 0); break; }
     case "wtimer": if (S.w.left != null) { S.w.left = null; stopTick(); } else S.w.left = C.writing.tasks[S.w.task].minutes * 60; render(); break;
     case "wcheck": writeCheck(); break;
+    case "wskel": { const T = C.writing.templates[S.w.task]; if (S.w.text.trim() && !S.w.confirmSkel) { S.w.confirmSkel = true; render(); break; } S.w.confirmSkel = false; S.w.text = T.skeleton; render(); const ta = $("#wtext"); if (ta) { ta.focus(); const i = ta.value.indexOf("……"); if (i >= 0) ta.setSelectionRange(i, i + 2); } break; }
     case "wself": { const i = +d.i; S.w.self[i] = !S.w.self[i]; el.querySelector(".tick").classList.toggle("on", S.w.self[i]); const a = await DB.get("attempts", S.w.attemptId); if (a) { a.self = S.w.self; DB.put("attempts", a); } break; }
     case "wagain": closeSheet(); S.w.draft1 = S.w.text; S.w.text = ""; render(); window.scrollTo(0, 0); break;
     /* speaking */

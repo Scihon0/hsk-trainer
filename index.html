@@ -12,6 +12,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>HSK Trainer</title>
+<script>try{var th=localStorage.getItem("theme");if(th==="light"||th==="dark")document.documentElement.setAttribute("data-theme",th)}catch(e){}</script>
 <style>
 :root{
   --bg:#f7f8f6;--surface:#fff;--sunk:#eef1ed;--ink:#141817;--muted:#66716c;--faint:#9aa39f;--line:#e1e6e1;
@@ -20,7 +21,8 @@
   --f-ui:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC",system-ui,sans-serif;
   --f-han:"Songti SC","STSong","Noto Serif SC",serif;--f-num:ui-monospace,"SF Mono",Menlo,monospace;
   color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1312;--surface:#171c1a;--sunk:#1d2321;--ink:#e7ece9;--muted:#9aa6a0;--faint:#6b7570;--line:#283030;--accent:#62c3a4;--accent-soft:#1a2e27;--good:#62c3a4;--good-soft:#1a2e27;--bad:#ee8b75;--bad-soft:#3a221c;--mark:#3b331d;color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1312;--surface:#171c1a;--sunk:#1d2321;--ink:#e7ece9;--muted:#9aa6a0;--faint:#6b7570;--line:#283030;--accent:#62c3a4;--accent-soft:#1a2e27;--good:#62c3a4;--good-soft:#1a2e27;--bad:#ee8b75;--bad-soft:#3a221c;--mark:#3b331d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1312;--surface:#171c1a;--sunk:#1d2321;--ink:#e7ece9;--muted:#9aa6a0;--faint:#6b7570;--line:#283030;--accent:#62c3a4;--accent-soft:#1a2e27;--good:#62c3a4;--good-soft:#1a2e27;--bad:#ee8b75;--bad-soft:#3a221c;--mark:#3b331d;color-scheme:dark}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
 body{font-family:var(--f-ui);font-size:16px;line-height:1.55;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}

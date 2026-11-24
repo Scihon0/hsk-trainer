@@ -637,6 +637,8 @@ function vSetup() {
     <div class="chips" style="margin:14px 0 26px"><button class="chip press" data-act="testmic">Test microphone</button><button class="chip press" data-act="testvoice">Play a voice clip</button><button class="chip press" data-act="persist">Ask Safari to keep data</button><button class="chip press" data-act="checkupdate">Check for update</button></div>
     <div class="h">Before going offline</div>
     <div class="selfcheck">${TONIGHT.map((x, i) => `<button data-act="tonight" data-i="${i}"><span class="tick ${t[i] ? "on" : ""}">${TICK}</span><span>${esc(x)}</span></button>`).join("")}</div>
+    <div class="h" style="margin-top:26px">Appearance</div>
+    <div class="chips">${[["auto", "Auto (follow iPad)"], ["light", "Light"], ["dark", "Dark"]].map(([k, l]) => `<button class="chip press" aria-pressed="${themeNow() === k}" data-act="theme" data-t="${k}">${l}</button>`).join("")}</div>
     <div class="h" style="margin-top:26px">Speech speed</div>
     <div class="chips">${[0.8, 0.9, 1].map(r => `<button class="chip press" aria-pressed="${kv("rate", 0.9) === r}" data-act="rate" data-r="${r}">${r}×</button>`).join("")}</div>
     <p class="muted small" style="margin-top:26px">Timings: HSK 5 speaking uses the official 3.0 sample (retell 1:30; pictures 3:00 + 2:00; opinion 3:30 + 2:30). HSK 4 timings are placeholders until checked. Voice: Fish Audio, generated in advance. Dictionary: CC-CEDICT (CC BY-SA 4.0). HSK 3.0 lists: drkameleon/complete-hsk-vocabulary.</p>
@@ -650,9 +652,20 @@ after.setup = async () => {
 };
 async function cachedCount() { if (!window.caches) return 0; const keys = await caches.keys(); let n = 0; for (const k of keys) { if (!k.startsWith("hsk-")) continue; n += (await (await caches.open(k)).keys()).length; } return n; }
 
+/* ================= theme ================= */
+function themeNow() { try { return localStorage.getItem("theme") || "auto"; } catch (e) { return "auto"; } }
+function setTheme(t) {
+  try { localStorage.setItem("theme", t); } catch (e) { }
+  if (t === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t);
+}
+function toggleTheme() {
+  const dark = document.documentElement.getAttribute("data-theme") === "dark" || (!document.documentElement.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  setTheme(dark ? "light" : "dark"); render();
+}
+
 /* ================= menu ================= */
 function menuSheet() {
-  openSheet(`<h2>Go to</h2><div class="list" style="margin-top:6px">${SCREENS.map(([k, z, e]) => `<button data-go="${k}"><span><span class="han" style="font-size:18px">${z}</span> <span class="muted">${e}</span></span><span class="min">${k === route() ? "here" : ""}</span></button>`).join("")}</div>`);
+  openSheet(`<div style="display:flex;justify-content:space-between;align-items:center"><h2>Go to</h2><button class="chip press" data-act="themetoggle">◐ Light / Dark</button></div><div class="list" style="margin-top:6px">${SCREENS.map(([k, z, e]) => `<button data-go="${k}"><span><span class="han" style="font-size:18px">${z}</span> <span class="muted">${e}</span></span><span class="min">${k === route() ? "here" : ""}</span></button>`).join("")}</div>`);
 }
 
 /* ================= events ================= */
@@ -715,6 +728,8 @@ document.addEventListener("click", async e => {
     case "tonight": { const t = kv("tonight", {}); t[d.i] = !t[d.i]; kvSet("tonight", t); el.querySelector(".tick").classList.toggle("on", t[d.i]); break; }
     case "testmic": { const ok = await startRecording(); if (ok) { toast("Recording 3 seconds…"); setTimeout(async () => { const r = await stopRecording(false); if (r && r.blob.size) { const u = URL.createObjectURL(r.blob); player.src = u; player.playbackRate = 1; player.play().catch(() => { }); toast("Playing back your test clip"); } else toast("Got no audio. Check the microphone permission."); }, 3000); } break; }
     case "checkupdate": try { const r = await navigator.serviceWorker.getRegistration(); if (!navigator.onLine) { toast("You're offline. Updates need internet."); break; } await r.update(); toast(r.installing || r.waiting ? "Downloading the update…" : "You have the latest version"); } catch (er) { toast("Couldn't check for updates"); } break;
+    case "theme": setTheme(d.t); render(); break;
+    case "themetoggle": toggleTheme(); break;
     case "testvoice": playSrc("audio/h5p1-01.mp3"); break;
     case "persist": try { const p = await navigator.storage.persist(); toast(p ? "Safari will keep your data" : "Safari said no. Add to Home Screen, then try again."); render(); } catch (er) { toast("Not supported here"); } break;
   }

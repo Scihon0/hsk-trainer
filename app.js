@@ -633,8 +633,8 @@ function vSetup() {
   const t = kv("tonight", {});
   return topBar("设置") + `<main class="page wrap"><div class="col">
     <h1>Setup & status</h1><p class="lede">Check these before you go offline.</p>
-    <div class="status" id="status"><div><span>Offline cache</span><span id="st-cache" class="muted">checking…</span></div><div><span>Storage kept by Safari</span><span id="st-persist" class="muted">checking…</span></div><div><span>Storage used</span><span id="st-usage" class="muted">checking…</span></div><div><span>Installed (Home Screen)</span><span class="${matchMedia("(display-mode: standalone)").matches || navigator.standalone ? "ok" : "no"}">${matchMedia("(display-mode: standalone)").matches || navigator.standalone ? "yes" : "not yet: Share → Add to Home Screen"}</span></div><div><span>Network</span><span>${navigator.onLine ? "online" : "offline"}</span></div></div>
-    <div class="chips" style="margin:14px 0 26px"><button class="chip press" data-act="testmic">Test microphone</button><button class="chip press" data-act="testvoice">Play a voice clip</button><button class="chip press" data-act="persist">Ask Safari to keep data</button></div>
+    <div class="status" id="status"><div><span>Offline cache</span><span id="st-cache" class="muted">checking…</span></div><div><span>Storage kept by Safari</span><span id="st-persist" class="muted">checking…</span></div><div><span>Storage used</span><span id="st-usage" class="muted">checking…</span></div><div><span>Installed (Home Screen)</span><span class="${matchMedia("(display-mode: standalone)").matches || navigator.standalone ? "ok" : "no"}">${matchMedia("(display-mode: standalone)").matches || navigator.standalone ? "yes" : "not yet: Share → Add to Home Screen"}</span></div><div><span>App version</span><span id="st-ver" class="muted">…</span></div><div><span>Network</span><span>${navigator.onLine ? "online" : "offline"}</span></div></div>
+    <div class="chips" style="margin:14px 0 26px"><button class="chip press" data-act="testmic">Test microphone</button><button class="chip press" data-act="testvoice">Play a voice clip</button><button class="chip press" data-act="persist">Ask Safari to keep data</button><button class="chip press" data-act="checkupdate">Check for update</button></div>
     <div class="h">Before going offline</div>
     <div class="selfcheck">${TONIGHT.map((x, i) => `<button data-act="tonight" data-i="${i}"><span class="tick ${t[i] ? "on" : ""}">${TICK}</span><span>${esc(x)}</span></button>`).join("")}</div>
     <div class="h" style="margin-top:26px">Speech speed</div>
@@ -645,6 +645,7 @@ function vSetup() {
 after.setup = async () => {
   try { const n = await cachedCount(); $("#st-cache").textContent = n ? n + " files ✓" : "not cached"; $("#st-cache").className = n ? "ok" : "no"; } catch (e) { }
   try { const p = navigator.storage && navigator.storage.persisted ? await navigator.storage.persisted() : false; $("#st-persist").textContent = p ? "yes ✓" : "not yet"; $("#st-persist").className = p ? "ok" : "no"; } catch (e) { }
+  try { const k = (await caches.keys()).find(x => x.startsWith("hsk-")); $("#st-ver").textContent = k ? k.replace("hsk-", "") : "–"; } catch (e) { }
   try { const e = await navigator.storage.estimate(); $("#st-usage").textContent = (e.usage / 1048576).toFixed(0) + " MB of " + (e.quota / 1073741824).toFixed(1) + " GB"; } catch (e) { }
 };
 async function cachedCount() { if (!window.caches) return 0; const keys = await caches.keys(); let n = 0; for (const k of keys) { if (!k.startsWith("hsk-")) continue; n += (await (await caches.open(k)).keys()).length; } return n; }
@@ -713,6 +714,7 @@ document.addEventListener("click", async e => {
     /* setup */
     case "tonight": { const t = kv("tonight", {}); t[d.i] = !t[d.i]; kvSet("tonight", t); el.querySelector(".tick").classList.toggle("on", t[d.i]); break; }
     case "testmic": { const ok = await startRecording(); if (ok) { toast("Recording 3 seconds…"); setTimeout(async () => { const r = await stopRecording(false); if (r && r.blob.size) { const u = URL.createObjectURL(r.blob); player.src = u; player.playbackRate = 1; player.play().catch(() => { }); toast("Playing back your test clip"); } else toast("Got no audio. Check the microphone permission."); }, 3000); } break; }
+    case "checkupdate": try { const r = await navigator.serviceWorker.getRegistration(); if (!navigator.onLine) { toast("You're offline. Updates need internet."); break; } await r.update(); toast(r.installing || r.waiting ? "Downloading the update…" : "You have the latest version"); } catch (er) { toast("Couldn't check for updates"); } break;
     case "testvoice": playSrc("audio/h5p1-01.mp3"); break;
     case "persist": try { const p = await navigator.storage.persist(); toast(p ? "Safari will keep your data" : "Safari said no. Add to Home Screen, then try again."); render(); } catch (er) { toast("Not supported here"); } break;
   }
@@ -736,7 +738,16 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet()
   }
   if ("serviceWorker" in navigator) {
     try {
-      await navigator.serviceWorker.register("sw.js");
+      const reg = await navigator.serviceWorker.register("sw.js", { updateViaCache: "none" });
+      // A new version installs in the background; when it takes over, reload once (unless mid-recording).
+      let reloading = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (reloading) return; reloading = true;
+        if (rec) { toast("Update ready. It will load next time you open the app."); return; }
+        toast("Updating to the latest version…"); setTimeout(() => location.reload(), 600);
+      });
+      reg.update().catch(() => { });
+      document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") reg.update().catch(() => { }); });
       navigator.serviceWorker.addEventListener("message", ev => { if (ev.data && ev.data.type === "cached") { CACHED = ev.data.count; render(); } });
       CACHED = await cachedCount(); if (route() !== "speak" || !S.sp || S.sp.phase !== "answer") render();
     } catch (e) { CACHED = 0; }

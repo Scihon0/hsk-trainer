@@ -1,0 +1,124 @@
+{
+  "devices": {
+    "比喻": "metaphor / simile: compares one thing to another (像, 如, 仿佛, 是)",
+    "拟人": "personification: gives human actions or feelings to things",
+    "排比": "parallelism: three or more phrases with the same structure, for rhythm and force",
+    "反复": "repetition: the same word or sentence repeated for emphasis or feeling",
+    "对比": "contrast: puts two opposite things side by side",
+    "叠词": "reduplication: doubled words (绿绿的, 慢慢地) for softness and vividness",
+    "设问": "asking a question and answering it yourself",
+    "反问": "rhetorical question: a question that really states a point",
+    "通感": "synesthesia: describes one sense in terms of another (a smell like a song)",
+    "象征": "symbolism: an object stands for an idea",
+    "借物喻人": "using an object to talk about how people should be",
+    "首尾呼应": "the ending echoes the opening",
+    "呼告": "speaking directly to a thing or absent person",
+    "细节描写": "close detail of an action or object that carries the emotion",
+    "旧用法": "older (1920s) usage that modern Chinese writes differently"
+  },
+  "oldUsage": {
+    "底": "In 1920s writing 底 is often used where modern Chinese writes 的 (我们底新花生 = 我们的新花生).",
+    "罢": "Here 罢 = modern 吧 (sentence-final particle).",
+    "么": "Here 么 at the end of a question = modern 吗.",
+    "那里": "In older texts 那里 can mean 哪里 (where).",
+    "他": "Older writing often uses 他 for things and animals too, where modern Chinese writes 它.",
+    "检": "Here 检 = modern 捡 (to pick up).",
+    "嬴": "Here 嬴 is used for 赢 (to win).",
+    "沈": "Here 沈 = modern 沉 (to sink).",
+    "馀": "馀 = modern 余 (more than; 二年馀 = 两年多).",
+    "著": "Here 著 = modern 着 (aspect particle)."
+  },
+  "books": {
+    "chan": {"intro": ["雨后，一只翅膀湿了的蝉挣扎着爬上松树，又被雨珠打落。作者借小虫写生命的脆弱和命运的无常。", "A cicada with rain-soaked wings climbs a pine and is knocked down again: a tiny scene about how fragile life is."],
+      "notes": [
+        {"q": "不老的松根", "t": "对比", "zh": "“不老”的松树和只活一个夏天的蝉形成对比。", "en": "The ageless pine contrasts with the short-lived cicada."},
+        {"q": "雨珠，你和他开玩笑么？", "t": "呼告", "zh": "作者直接对雨珠说话，把雨珠当成人，表达对蝉的同情。", "en": "The writer talks to the raindrop as if it were a person, showing pity for the cicada."},
+        {"q": "蚂蚁来了！野鸟也快要看见他了！", "t": "细节描写", "zh": "危险一个接一个出现，短句和感叹号制造紧张感。", "en": "Short exclamations pile up the dangers and build tension."}]},
+    "mianju": {"intro": ["作者比较纸做的面具和人的脸：面具表情不变，人脸却会“装”。文章讽刺人的虚伪。", "Paper masks never change their expression; human faces pretend. A short piece on hypocrisy."],
+      "notes": [
+        {"q": "人面原不如那纸制底面具哟", "t": "对比", "zh": "开头就把人脸和面具对比，提出出人意料的观点。", "en": "Opens with a surprising contrast: a real face is worse than a mask."},
+        {"q": "红的还是红，白的还是白", "t": "反复", "zh": "重复句式强调面具“不改变”。", "en": "The repeated pattern stresses that masks never change."},
+        {"q": "我们要学面具，但不要戴他", "t": "象征", "zh": "学面具的“真”，不要用面具遮住自己。结尾点题。", "en": "Learn the mask's honesty, don't hide behind one: the point of the piece."}]},
+    "hai": {"intro": ["一艘大船沉了，“我”和朋友坐在救生船上。大海象征人生：没有人知道方向，但还是要继续划桨。", "After a shipwreck, two friends in a lifeboat: the sea stands for life, where you keep rowing without knowing the way."],
+      "notes": [
+        {"q": "风狂浪骇底海面", "t": "象征", "zh": "风浪大的海面象征充满困难和变化的人生。", "en": "The stormy sea symbolizes a life full of hardship and change."},
+        {"q": "那要载我们到目的地底船快要歇息去了", "t": "拟人", "zh": "用“歇息”说船沉了，语气平静却很悲凉。", "en": "“Going to rest” for a sinking ship: calm words for a grim fact."},
+        {"q": "我们尽管划罢", "t": "细节描写", "zh": "全文主旨：不知道方向也要努力。注意“罢”=吧。", "en": "The message: keep rowing anyway. Note 罢 = 吧."}]},
+    "yuan": {"intro": ["妻子希望丈夫做伟大的人，丈夫却愿意像盐一样，默默地让别人受益而不被看见。", "His wife wishes he could be something grand; he would rather be like salt: useful and unseen."],
+      "notes": [
+        {"q": "你应当作荫，不应当受荫", "t": "对比", "zh": "“作荫”和“受荫”对比：给别人遮阴，而不是享受别人的保护。", "en": "Give shade, don't just enjoy it."},
+        {"q": "愿你作无边宝华盖", "t": "排比", "zh": "后面连用四个“愿你……”，句式相同，气势越来越强。", "en": "Four “愿你…” lines in a row build a grand, rising rhythm."},
+        {"q": "我愿做调味底精盐", "t": "比喻", "zh": "把自己比作盐：融化在食物里，让人尝到味道却看不见盐。", "en": "He compares himself to salt: it disappears into food but gives the flavour."},
+        {"q": "盐底功用，若只在调味，那就不配称为盐了", "t": "象征", "zh": "盐还能防腐、保护，象征更深的奉献。", "en": "Salt also preserves: a deeper kind of service."}]},
+    "lhs": {"intro": ["一家人过“收获节”，父亲借花生教孩子：要做有用的人，不要只做外表好看的人。中学课本名篇。", "At a family harvest night, the father uses peanuts to teach: be useful, not showy. A classic textbook piece."],
+      "notes": [
+        {"q": "买种底买种，动土底动土，灌园底灌园", "t": "排比", "zh": "三个相同结构的短语，写出大家分工忙碌、很开心的样子。", "en": "Three parallel phrases show everyone busy and happy."},
+        {"q": "这小小的豆不像那好看的苹果、桃子、石榴", "t": "对比", "zh": "花生和挂在枝上的漂亮水果对比，突出花生不炫耀。", "en": "Peanuts versus showy fruit on the branch."},
+        {"q": "所以你们要像花生", "t": "借物喻人", "zh": "从花生说到做人，是全文的中心。", "en": "From peanuts to people: the centre of the essay."},
+        {"q": "父亲底话现在还印在我心版上", "t": "比喻", "zh": "把心比作可以“印”字的版，说明话记得很深。", "en": "The heart is a printing block his words are pressed into."}]},
+    "cc": {"intro": ["作者感叹时间匆匆流逝，一去不回。全文用很多比喻和排比，节奏像诗。", "On time slipping away and never returning. Full of images and parallel lines, almost a poem."],
+      "notes": [
+        {"q": "燕子去了，有再来的时候；杨柳枯了，有再青的时候；桃花谢了，有再开的时候。", "t": "排比", "zh": "三个相同的句子，说自然界的东西能回来，引出“日子却回不来”。", "en": "Three parallel lines: nature returns, which sets up the contrast that our days don't."},
+        {"q": "我们的日子为什么一去不复返呢？", "t": "设问", "zh": "作者提出问题，引发读者思考。", "en": "A question that draws the reader in."},
+        {"q": "像针尖上一滴水滴在大海里", "t": "比喻", "zh": "把自己的日子比作大海里的一滴水，又小又没有声音。", "en": "His days are a drop of water from a needle tip into the sea."},
+        {"q": "洗手的时候，日子从水盆里过去；吃饭的时候，日子从饭碗里过去", "t": "拟人", "zh": "把“日子”写成会走的人，从生活小事中溜走。", "en": "Days are personified, slipping past during everyday moments."}]},
+    "linye": {"intro": ["春天的山林里，孩子们在桃花下玩耍。作者用拟人的手法写出春光让万物都“醉”了。", "Children play under peach blossoms in spring hills; nature itself seems drunk on spring."],
+      "notes": [
+        {"q": "桃花听得入神，禁不住落了几点粉泪", "t": "拟人", "zh": "桃花像人一样“听”鸟唱歌，感动得“流泪”，其实是花瓣落下。", "en": "The peach blossoms listen and shed “pink tears”: falling petals."},
+        {"q": "小草花听得大醉", "t": "拟人", "zh": "小花“醉”了，随风摇摆。", "en": "Little flowers sway as if drunk."},
+        {"q": "漫游底薄云还是从这峰飞过那峰", "t": "首尾呼应", "zh": "结尾重复开头的画面，春光依旧。", "en": "The ending repeats an opening image: spring goes on."}]},
+    "spring": {"intro": ["朱自清写春天的到来：春草、春花、春风、春雨和人们。语言清新，有很多比喻、拟人和叠词，是写景的范文。", "Spring arrives: grass, flowers, wind, rain and people. Fresh language full of images; a model of descriptive writing."],
+      "notes": [
+        {"q": "盼望着，盼望着", "t": "反复", "zh": "重复表达等春天的急切心情。", "en": "Repetition shows how eagerly spring is awaited."},
+        {"q": "春天的脚步近了", "t": "拟人", "zh": "春天像人一样走过来。", "en": "Spring walks closer like a person."},
+        {"q": "小草偷偷地从土里钻出来，嫩嫩的，绿绿的", "t": "叠词", "zh": "“偷偷地”是拟人，“嫩嫩的，绿绿的”是叠词，写出小草可爱。", "en": "Personification plus doubled adjectives make the grass lively and sweet."},
+        {"q": "红的像火，粉的像霞，白的像雪", "t": "比喻", "zh": "三个比喻排在一起（也是排比），写花的颜色。", "en": "Three similes in a row for the flowers' colours."},
+        {"q": "春天像刚落地的娃娃", "t": "比喻", "zh": "结尾三段都用“春天像……”，把春天比作娃娃、小姑娘、青年。", "en": "The last three paragraphs compare spring to a baby, a girl and a young man."}]},
+    "lv": {"intro": ["选自《温州的踪迹》。作者第二次游梅雨潭，被潭水的绿深深吸引，用大量比喻写“绿”。", "From 'Traces of Wenzhou': the writer is captivated by the green of Meiyu Pool and describes it with image after image."],
+      "notes": [
+        {"q": "我第二次到仙岩的时候，我惊诧于梅雨潭的绿了。", "t": "首尾呼应", "zh": "开头一句，结尾又重复一次，突出“绿”给人的震撼。", "en": "The first line returns at the end, framing the essay."},
+        {"q": "像少妇拖著的裙幅", "t": "比喻", "zh": "把潭水轻轻的波纹比作裙子。", "en": "The water's ripples are like a trailing skirt."},
+        {"q": "女儿绿", "t": "拟人", "zh": "给绿色起名“女儿绿”，像对待心爱的人。", "en": "He names the colour “daughter green”, as if it were someone he loves."}]},
+    "by": {"intro": ["作者回忆父亲在车站送他、为他买橘子的背影。语言朴素，感情深沉，写父爱的名篇。", "The writer remembers his father's back as he climbed to buy oranges at the station: a plain, deeply moving piece about a father's love."],
+      "notes": [
+        {"q": "我最不能忘记的是他的背影", "t": "首尾呼应", "zh": "开头点题，结尾又写在泪光中看见背影。", "en": "Names the subject at the start and returns to it at the end."},
+        {"q": "两脚再向上缩", "t": "细节描写", "zh": "“攀、缩、倾”等动作写出胖胖的父亲爬月台的吃力，表现父爱。", "en": "Exact verbs show how hard the climb was for the heavy father."},
+        {"q": "我的泪很快地流下来了", "t": "细节描写", "zh": "简单的一句话，写出儿子的感动。", "en": "A plain sentence carries the son's emotion."},
+        {"q": "不相见已二年馀了", "t": "旧用法", "zh": "“馀”=余，二年馀=两年多。", "en": "馀 = 余: more than two years."}]},
+    "xiao": {"intro": ["一对夫妻之间的小情趣：兰花的香，还是妻子的香？用对话写出温馨的生活。", "A playful moment between husband and wife over the scent of orchids, told mostly in dialogue."],
+      "notes": [
+        {"q": "到底是兰花底香，是你底香？", "t": "反复", "zh": "妻子把丈夫的问题原样问回去，俏皮又亲密。", "en": "She repeats his question back to him: teasing and affectionate."}]},
+    "htys": {"intro": ["作者心里不宁静，夜里独自去荷塘散步。月光下的荷塘写得极美，也透出淡淡的忧愁。写景名篇。", "Restless one night, the writer walks to the lotus pond. Beautiful moonlit description with a quiet sadness underneath."],
+      "notes": [
+        {"q": "这几天心里颇不宁静。", "t": "细节描写", "zh": "第一句就是全文的情感基调。", "en": "The first sentence sets the mood of the whole essay."},
+        {"q": "曲曲折折的荷塘上面，弥望的是田田的叶子", "t": "叠词", "zh": "“曲曲折折”“田田”等叠词让语言有音乐感。", "en": "Doubled words give the line a musical feel."},
+        {"q": "像亭亭的舞女的裙", "t": "比喻", "zh": "把荷叶比作舞女的裙子。", "en": "Lotus leaves are compared to a dancer's skirt."},
+        {"q": "仿佛远处高楼上渺茫的歌声似的", "t": "通感", "zh": "把闻到的花香写成听到的歌声，是著名的通感句。", "en": "Smell described as faint distant singing: a famous synesthesia."},
+        {"q": "但热闹是它们的，我什么也没有", "t": "对比", "zh": "蝉和蛙的热闹与作者的孤独对比。", "en": "The noisy frogs and cicadas against his loneliness."}]},
+    "xue": {"intro": ["鲁迅对比江南温柔的雪和北方孤独、飞舞的雪，借雪表达自己的精神。语言难，属于《野草》。", "Lu Xun contrasts the soft snow of the south with the lonely, whirling snow of the north. From 'Wild Grass'; difficult language."],
+      "notes": [
+        {"q": "是极壮健的处子的皮肤", "t": "比喻", "zh": "把江南的雪比作年轻健康的皮肤，写它滋润、美丽。", "en": "Southern snow is compared to young, healthy skin."},
+        {"q": "是死掉的雨，是雨的精魂", "t": "象征", "zh": "北方的雪象征孤独而坚强的精神。", "en": "The northern snow stands for a lonely, defiant spirit."}]},
+    "qiuye": {"intro": ["秋夜里，鲁迅看着后园的枣树和天空。枣树象征坚强的战斗者。属于《野草》，语言难。", "On an autumn night Lu Xun looks at the jujube trees and the sky; the trees stand for a fighter. From 'Wild Grass'."],
+      "notes": [
+        {"q": "一株是枣树，还有一株也是枣树", "t": "反复", "zh": "非常有名的一句。故意不说“两株都是枣树”，给人孤单、单调的感觉。", "en": "Famous line: instead of “both are jujubes”, the slow repetition feels lonely and stark."},
+        {"q": "奇怪而高", "t": "拟人", "zh": "天空被写得像一个冷漠的人。", "en": "The sky is written like a cold, distant person."}]},
+    "fz": {"intro": ["鲁迅回忆小时候毁掉弟弟的风筝，长大后才明白自己错了，想道歉却已经没有机会。", "Lu Xun remembers destroying his little brother's kite, and realizing too late that he was wrong."],
+      "notes": [
+        {"q": "北京的冬季，地上还有积雪", "t": "对比", "zh": "北京冬天的灰暗和回忆中故乡春天的风筝对比。", "en": "Beijing's grey winter against the bright kites of home in spring."},
+        {"q": "精神的虐杀", "t": "细节描写", "zh": "作者用很重的词批评自己，表达深深的悔恨。", "en": "He uses a harsh phrase on himself: deep regret."}]},
+    "hgs": {"intro": ["作者在昏暗的夜里打盹，梦见一个美丽的故事，醒来故事却碎了。美好与现实的对比。", "Dozing on a dim night, he dreams a lovely story that shatters when he wakes."],
+      "notes": [
+        {"q": "我在朦胧中，看见一个好的故事。", "t": "对比", "zh": "昏暗的现实和美丽的梦形成对比。", "en": "The dim present against the beautiful dream."}]},
+    "bcy": {"intro": ["鲁迅回忆童年：百草园里自由快乐，三味书屋里读书严肃。前后对比，写出童年的乐趣。", "Lu Xun's childhood: freedom in the Hundred-Herb Garden, discipline at the Three-Flavour Study."],
+      "notes": [
+        {"q": "不必说碧绿的菜畦，光滑的石井栏，高大的皂荚树，紫红的桑椹", "t": "排比", "zh": "一连串“形容词+名词”，写出百草园景物丰富。", "en": "A run of adjective + noun pairs shows how rich the garden was."},
+        {"q": "三味书屋", "t": "对比", "zh": "后半部分写书屋的严肃，和百草园的自由对比。", "en": "The strict study in the second half contrasts with the free garden."}]},
+    "ty": {"intro": ["鲁迅在日本学医时的老师藤野先生认真、正直、没有民族偏见。文章也写了鲁迅弃医从文的原因。", "Lu Xun's anatomy teacher in Japan: earnest, fair, free of prejudice. Also explains why Lu Xun left medicine for writing."],
+      "notes": [
+        {"q": "东京也无非是这样。", "t": "细节描写", "zh": "第一句带着失望和讽刺的语气。", "en": "The first line carries disappointment and irony."}]},
+    "qhh": {"intro": ["朱自清和俞平伯夜游秦淮河，写灯光、桨声、水波和复杂的心情。很长、很难，适合挑战。", "Zhu Ziqing and a friend take a night boat on the Qinhuai River: lights, oars, water, and mixed feelings. Long and hard: a challenge read."],
+      "notes": [
+        {"q": "一九二三年八月的一晚，我和平伯同游秦淮河", "t": "细节描写", "zh": "开头交代时间、人物、地点。", "en": "Opens with time, people and place."}]}
+  }
+}

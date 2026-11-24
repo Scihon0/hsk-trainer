@@ -466,33 +466,94 @@ function books() {
   const sanwen = C.reading.books.map((b, i) => ({ ...b, author: b.author + " · " + b.year, color: SPINE[i % SPINE.length] }));
   return { graded, sanwen, all: graded.concat(sanwen) };
 }
+const isHan = c => /[一-鿿㐀-䶿]/.test(c);
+const inDict = w => !!((DICT && DICT[w]) || (LEVELS && LEVELS[w]));
+// Bidirectional maximum matching: run forward and backward, keep the split with fewer words, then fewer single characters.
+function segRun(s) {
+  const MAX = 4, f = [], b = [];
+  for (let i = 0; i < s.length;) { let L = 1; for (let n = Math.min(MAX, s.length - i); n > 1; n--) if (inDict(s.substr(i, n))) { L = n; break; } f.push(s.substr(i, L)); i += L; }
+  for (let j = s.length; j > 0;) { let L = 1; for (let n = Math.min(MAX, j); n > 1; n--) if (inDict(s.substr(j - n, n))) { L = n; break; } b.unshift(s.substr(j - L, L)); j -= L; }
+  const singles = a => a.filter(w => w.length === 1).length;
+  if (f.length !== b.length) return f.length < b.length ? f : b;
+  return singles(f) < singles(b) ? f : b;
+}
+function segPara(p) { // returns [{s, e}] word spans over the paragraph (only Han runs)
+  const out = []; let i = 0;
+  while (i < p.length) {
+    if (!isHan(p[i])) { i++; continue; }
+    let j = i; while (j < p.length && isHan(p[j])) j++;
+    let k = i; for (const w of segRun(p.slice(i, j))) { out.push({ s: k, e: k + w.length }); k += w.length; }
+    i = j;
+  }
+  return out;
+}
+const SEG = {};
 function spinesHTML(list, cur) { return list.map(b => `<button class="spine press" style="background:${b.color}" data-act="book" data-id="${b.id}" aria-current="${b.id === cur}"><span class="ti">${esc(b.title)}</span><span class="au">${esc(b.author.split(" · ")[0])}</span></button>`).join(""); }
 function vRead() {
   if (!C.reading) return topBar("阅读") + `<main class="page wrap col"><p>Loading…</p></main>`;
   const B = books();
   if (!S.book) return topBar("阅读", "Tap a book") + `<main class="page wrap"><div class="wide"><h1>书架</h1>
-    <div class="h" style="margin-top:22px">散文 · public domain · above HSK 5</div><div class="spines">${spinesHTML(B.sanwen)}</div>
-    <div class="h" style="margin-top:14px">现代文 · graded HSK 4–5 (the 排序 passages, in order)</div><div class="spines">${spinesHTML(B.graded)}</div>
-    <p class="muted small">Tap any character in a text to look it up. Dictionary: CC-CEDICT (CC BY-SA 4.0, MDBG). 散文 texts from Wikisource.</p></div></main>`;
+    <div class="h" style="margin-top:22px">散文 · public domain · shortest first <span>${B.sanwen.length} texts</span></div><div class="spines">${spinesHTML(B.sanwen)}</div>
+    <div class="h" style="margin-top:14px">现代文 · graded HSK 4–5 (the 排序 passages, in order) <span>${B.graded.length} texts</span></div><div class="spines">${spinesHTML(B.graded)}</div>
+    <p class="muted small">Tap any word to look it up. Underlined sentences have notes on 修辞 (literary devices); tap the 注 mark. Dictionary: CC-CEDICT (CC BY-SA 4.0, MDBG). 散文 texts from Wikisource.</p></div></main>`;
   const b = B.all.find(x => x.id === S.book);
-  return topBar("阅读", esc(b.title) + " · tap a word") + `<main class="page wrap"><div class="wide"><button class="quiet press" data-act="shelf" style="padding-left:0">← Shelf</button>
+  if (!DICT) { loadDict().then(() => { if (route() === "read" && S.book === b.id) render(); }).catch(() => toast("Dictionary not available")); return topBar("阅读", esc(b.title)) + `<main class="page wrap col"><p class="muted" style="padding-top:40px">Loading the dictionary…</p></main>`; }
+  const N = (C.notes.books[b.id] || { notes: [] }), showNotes = kv("notesOn", true);
+  const html = b.paras.map((p, pi) => {
+    const key = b.id + ":" + pi; const words = SEG[key] || (SEG[key] = segPara(p));
+    const wAt = new Array(p.length).fill(-1); words.forEach((w, wi) => { for (let k = w.s; k < w.e; k++) wAt[k] = wi; });
+    const nq = new Array(p.length).fill(-1), endMark = {};
+    if (showNotes) N.notes.forEach((n, ni) => { const at = p.indexOf(n.q); if (at < 0) return; for (let k = at; k < at + n.q.length; k++) nq[k] = ni; endMark[at + n.q.length - 1] = ni; });
+    let out = "";
+    for (let k = 0; k < p.length; k++) {
+      const c = p[k], cls = (nq[k] >= 0 ? " nq" : "");
+      out += wAt[k] >= 0 ? `<span class="c${cls}" data-p="${pi}" data-w="${wAt[k]}">${c}</span>` : (nq[k] >= 0 ? `<span class="nq">${esc(c)}</span>` : esc(c));
+      if (k in endMark) out += `<button class="nm press" data-act="note" data-n="${endMark[k]}" aria-label="Note">注</button>`;
+    }
+    return `<p>${out}</p>`;
+  }).join("");
+  const intro = N.intro ? `<details class="intro" ${kv("introOpen", true) ? "open" : ""}><summary>About this text</summary><p class="han">${esc(N.intro[0])}</p><p class="muted">${esc(N.intro[1])}</p>${N.notes.length ? `<p class="muted small">${N.notes.length} notes on literary devices in this text.</p>` : ""}</details>` : "";
+  return topBar("阅读", esc(b.title)) + `<main class="page wrap"><div class="wide"><div style="display:flex;justify-content:space-between;align-items:center"><button class="quiet press" data-act="shelf" style="padding-left:0">← Shelf</button>${N.notes.length ? `<button class="chip press" aria-pressed="${showNotes}" data-act="notes">${showNotes ? "Notes on" : "Notes off"}</button>` : ""}</div>
     <div class="spines compact">${spinesHTML(b.shelf === "graded" ? B.graded : B.sanwen, b.id)}</div>
-    <article class="article"><h1>${esc(b.title)}</h1><div class="by">${esc(b.author)}${b.shelf === "graded" ? "" : " · above HSK 5"}</div>
-    ${b.paras.map((p, pi) => `<p>${[...p].map((c, ci) => /[一-鿿]/.test(c) ? `<span class="c" data-p="${pi}" data-i="${ci}">${c}</span>` : esc(c)).join("")}</p>`).join("")}
-    <div class="end">— 完 —</div></article></div></main>`;
+    <article class="article"><h1>${esc(b.title)}</h1><div class="by">${esc(b.author)}${b.shelf === "graded" ? "" : " · above HSK 5"}${b.chars ? " · " + b.chars + " 字" : ""}</div>${intro}
+    ${html}<div class="end">— 完 —</div></article></div></main>`;
 }
-async function lookupAt(pi, ci) {
-  try { await loadDict(); } catch (e) { toast("Dictionary not available"); return; }
-  const b = books().all.find(x => x.id === S.book), p = b.paras[pi];
-  let word = p[ci], entry = DICT[word];
-  for (let n = Math.min(6, p.length - ci); n > 1; n--) { const w = p.substr(ci, n); if (DICT[w]) { word = w; entry = DICT[w]; break; } }
+function entryHTML(word) {
+  const e = DICT[word]; if (!e) return `<div class="m muted">No dictionary entry</div>`;
+  return e.map(x => { const [py, m] = x.split("|"); return `<div class="m"><b>${esc(py)}</b> ${esc(m)}</div>`; }).join("");
+}
+function showWord(pi, s, e) {
+  const b = books().all.find(x => x.id === S.book), p = b.paras[pi], word = p.slice(s, e);
+  S.sel = { pi, s, e };
   document.querySelectorAll(".article .c.on").forEach(x => x.classList.remove("on"));
-  for (let k = 0; k < word.length; k++) { const el = document.querySelector(`.article .c[data-p="${pi}"][data-i="${ci + k}"]`); if (el) el.classList.add("on"); }
-  const saved = kv("savedWords", []), lvl = LEVELS && LEVELS[word];
+  const chars = document.querySelectorAll(".article > p")[pi];
+  if (chars) { let k = 0; chars.childNodes.forEach(n => { if (n.nodeType === 1 && n.classList.contains("nm")) return; const len = (n.textContent || "").length; if (n.nodeType === 1 && n.classList.contains("c") && k >= s && k < e) n.classList.add("on"); k += len; }); }
+  const lvl = LEVELS && LEVELS[word], old = b.shelf === "sanwen" && C.notes.oldUsage[word];
+  const chars2 = [...word];
   const pop = $("#pop");
-  pop.innerHTML = `<span class="w">${esc(word)}</span>${lvl ? `<span class="p">HSK ${lvl}</span>` : ""}${(entry || ["|no entry"]).map(e => { const [py, m] = e.split("|"); return `<div class="m"><b>${esc(py)}</b> ${esc(m)}</div>`; }).join("")}
-    <button class="add press" data-act="saveword" data-w="${esc(word)}">${saved.some(s => s.w === word) ? "Saved to review ✓" : "+ Add to review"}</button>`;
-  pop.classList.add("on"); clearTimeout(lookupAt._t); lookupAt._t = setTimeout(() => pop.classList.remove("on"), 6000);
+  pop.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span><span class="w">${esc(word)}</span>${lvl ? `<span class="p">HSK ${lvl}</span>` : ""}</span><button class="add press" data-act="popclose" aria-label="Close">✕</button></div>
+    ${old ? `<div class="m" style="color:#e9c46a">旧用法 · ${esc(old)}</div>` : ""}${entryHTML(word)}
+    ${chars2.length > 1 ? `<div class="m" style="opacity:.75;margin-top:6px;border-top:1px solid rgba(255,255,255,.15);padding-top:6px">${chars2.map(c => { const en = DICT[c] ? DICT[c][0].split("|") : ["", ""]; return `<div><b class="han">${esc(c)}</b> ${esc(en[0])} · ${esc((en[1] || "").slice(0, 40))}</div>`; }).join("")}</div>` : ""}
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px">
+      ${chars2.length > 1 ? `<button class="add press" data-act="selshrink">− Shorter</button>` : ""}<button class="add press" data-act="selgrow">+ Join next</button>
+      <button class="add press" data-act="saveword" data-w="${esc(word)}">${kv("savedWords", []).some(x => x.w === word) ? "Saved ✓" : "+ Add to review"}</button></div>`;
+  pop.classList.add("on");
+}
+function tapChar(pi, wi) {
+  const b = books().all.find(x => x.id === S.book), words = SEG[b.id + ":" + pi], w = words[wi];
+  showWord(pi, w.s, w.e);
+}
+function selAdjust(dir) {
+  const sel = S.sel; if (!sel) return; const b = books().all.find(x => x.id === S.book), p = b.paras[sel.pi], words = SEG[b.id + ":" + sel.pi];
+  if (dir > 0) { const nxt = words.find(w => w.s >= sel.e); if (nxt && nxt.s === sel.e && sel.e - sel.s + (nxt.e - nxt.s) <= 8) showWord(sel.pi, sel.s, nxt.e); else if (sel.e < p.length && isHan(p[sel.e])) showWord(sel.pi, sel.s, sel.e + 1); }
+  else if (sel.e - sel.s > 1) showWord(sel.pi, sel.s, sel.e - 1);
+}
+function showNote(ni) {
+  const n = C.notes.books[S.book].notes[ni], def = C.notes.devices[n.t] || "";
+  openSheet(`<div class="chips" style="margin-bottom:10px"><span class="chip" aria-pressed="true">${esc(n.t)}</span><span class="muted small" style="align-self:center">${esc(def)}</span></div>
+    <p class="han" style="font-size:20px;line-height:1.8;margin:0 0 12px;border-left:3px solid var(--accent);padding-left:12px">${esc(n.q)}</p>
+    <p class="han" style="font-size:17px;line-height:1.8;margin:0 0 8px">${esc(n.zh)}</p><p class="muted" style="margin:0">${esc(n.en)}</p>
+    <button class="btn ghost press" data-act="closesheet" style="margin-top:18px">Back to the text</button>`);
 }
 
 /* ================= export / backup ================= */
@@ -588,7 +649,7 @@ function menuSheet() {
 document.addEventListener("click", async e => {
   const el = e.target.closest("[data-act],[data-go],.article .c,#scrim"); if (!el) return;
   if (el.id === "scrim") { closeSheet(); return; }
-  if (el.matches(".article .c")) { lookupAt(+el.dataset.p, +el.dataset.i); return; }
+  if (el.matches(".article .c")) { tapChar(+el.dataset.p, +el.dataset.w); return; }
   const d = el.dataset;
   if (d.go) { if (d.mode) { kvSet("orderMode", d.mode); newOrder(d.mode); } closeSheet(); go(d.go); return; }
   switch (d.act) {
@@ -631,9 +692,14 @@ document.addEventListener("click", async e => {
     case "spnext": { stopTick(); player.pause(); const items = spItems(S.sp.task); newSpeak(S.sp.task, (S.sp.idx + 1) % items.length); render(); window.scrollTo(0, 0); break; }
     case "rate": kvSet("rate", +d.r); player.playbackRate = +d.r; render(); break;
     /* reading */
-    case "book": S.book = d.id; markDone("rd"); render(); window.scrollTo(0, 0); break;
+    case "book": S.book = d.id; S.sel = null; $("#pop").classList.remove("on"); markDone("rd"); render(); window.scrollTo(0, 0); break;
     case "shelf": S.book = null; $("#pop").classList.remove("on"); render(); break;
-    case "saveword": { const s = kv("savedWords", []); if (!s.some(x => x.w === d.w)) { s.push({ w: d.w, at: Date.now(), from: S.book }); kvSet("savedWords", s); } el.textContent = "Saved to review ✓"; break; }
+    case "note": showNote(+d.n); break;
+    case "notes": kvSet("notesOn", !kv("notesOn", true)); $("#pop").classList.remove("on"); render(); break;
+    case "popclose": $("#pop").classList.remove("on"); document.querySelectorAll(".article .c.on").forEach(x => x.classList.remove("on")); break;
+    case "selgrow": selAdjust(1); break;
+    case "selshrink": selAdjust(-1); break;
+    case "saveword": { const s = kv("savedWords", []); if (!s.some(x => x.w === d.w)) { s.push({ w: d.w, at: Date.now(), from: S.book }); kvSet("savedWords", s); } el.textContent = "Saved ✓"; break; }
     /* setup */
     case "tonight": { const t = kv("tonight", {}); t[d.i] = !t[d.i]; kvSet("tonight", t); el.querySelector(".tick").classList.toggle("on", t[d.i]); break; }
     case "testmic": { const ok = await startRecording(); if (ok) { toast("Recording 3 seconds…"); setTimeout(async () => { const r = await stopRecording(false); if (r && r.blob.size) { const u = URL.createObjectURL(r.blob); player.src = u; player.playbackRate = 1; player.play().catch(() => { }); toast("Playing back your test clip"); } else toast("Got no audio. Check the microphone permission."); }, 3000); } break; }
@@ -649,8 +715,8 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet()
   try {
     await DB.open(); await kvLoad();
     if (!kv("tripStart")) kvSet("tripStart", dayKey());
-    const [speaking, ordering, writing, reading, picsets] = await Promise.all(["speaking", "ordering", "writing", "reading", "picsets"].map(n => loadJSON("content/" + n + ".json")));
-    Object.assign(C, { speaking, ordering, writing, reading, picsets });
+    const [speaking, ordering, writing, reading, picsets, notes] = await Promise.all(["speaking", "ordering", "writing", "reading", "picsets", "notes"].map(n => loadJSON("content/" + n + ".json")));
+    Object.assign(C, { speaking, ordering, writing, reading, picsets, notes });
     loadJSON("content/levels.json").then(l => { LEVELS = l; }).catch(() => { });
     await refreshAttempts();
     render();

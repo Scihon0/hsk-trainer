@@ -20,7 +20,7 @@ self.addEventListener("install", e => {{
   e.waitUntil((async () => {{
     const c = await caches.open(CACHE);
     // add in small batches so one slow file doesn't fail the whole install
-    for (let i = 0; i < FILES.length; i += 20) await c.addAll(FILES.slice(i, i + 20));
+    for (let i = 0; i < FILES.length; i += 20) await c.addAll(FILES.slice(i, i + 20).map(u => new Request(u, {{ cache: "reload" }})));
     await self.skipWaiting();
   }})());
 }});

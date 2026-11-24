@@ -665,7 +665,10 @@ function toggleTheme() {
 
 /* ================= menu ================= */
 function menuSheet() {
-  openSheet(`<div style="display:flex;justify-content:space-between;align-items:center"><h2>Go to</h2><button class="chip press" data-act="themetoggle">◐ Light / Dark</button></div><div class="list" style="margin-top:6px">${SCREENS.map(([k, z, e]) => `<button data-go="${k}"><span><span class="han" style="font-size:18px">${z}</span> <span class="muted">${e}</span></span><span class="min">${k === route() ? "here" : ""}</span></button>`).join("")}</div>`);
+  openSheet(`<h2>Go to</h2><div class="list" style="margin-top:6px">${SCREENS.map(([k, z, e]) => `<button data-go="${k}"><span><span class="han" style="font-size:18px">${z}</span> <span class="muted">${e}</span></span><span class="min">${k === route() ? "here" : ""}</span></button>`).join("")}</div>
+    <div class="chips" style="margin-top:16px"><button class="chip press" data-act="backup">⤓ Back up to Files</button><button class="chip press" data-act="themetoggle">◐ Light / Dark</button></div>
+    <p class="muted small" style="margin:14px 0 0">Version <span id="menuver">…</span></p>`);
+  caches.keys().then(ks => { const k = ks.find(x => x.startsWith("hsk-")); const el = $("#menuver"); if (el) el.textContent = k ? k.replace("hsk-", "") : "not cached"; }).catch(() => { });
 }
 
 /* ================= events ================= */

@@ -8,7 +8,7 @@ root = Path(__file__).resolve().parent.parent
 files = ["./", "index.html", "app.js", "manifest.webmanifest"]
 for d in ["content", "audio", "pics", "icons"]:
     files += sorted(str(p.relative_to(root)) for p in (root / d).rglob("*") if p.is_file() and not p.name.startswith("."))
-h = hashlib.sha256()
+h = hashlib.sha256(Path(__file__).read_bytes())
 for f in files[1:]:
     h.update(f.encode()); h.update((root / f).read_bytes())
 version = h.hexdigest()[:10]
@@ -33,13 +33,26 @@ self.addEventListener("activate", e => {{
   }})());
 }});
 self.addEventListener("fetch", e => {{
-  if (e.request.method !== "GET") return;
+  const req = e.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+  if (url.origin !== location.origin) return;
+  // App code (page, scripts, small data): network first so updates show up immediately; cache when offline.
+  const p = url.pathname;
+  const fresh = req.mode === "navigate" || /[.](html|js|webmanifest)$/.test(p) || /content[/](?!dict)[^/]+[.]json$/.test(p);
   e.respondWith((async () => {{
     const c = await caches.open(CACHE);
-    const hit = await c.match(e.request, {{ ignoreSearch: true }});
+    if (fresh) {{
+      try {{
+        const r = await fetch(req, {{ cache: "no-cache" }});
+        if (r.ok) {{ c.put(req.mode === "navigate" ? "index.html" : req, r.clone()); return r; }}
+      }} catch (err) {{ }}
+      return (await c.match(req.mode === "navigate" ? "index.html" : req, {{ ignoreSearch: true }})) || (await c.match("index.html")) || Response.error();
+    }}
+    // Audio, pictures, dictionary: cache first (big, rarely change).
+    const hit = await c.match(req, {{ ignoreSearch: true }});
     if (hit) return hit;
-    try {{ return await fetch(e.request); }}
-    catch (err) {{ return (await c.match("index.html")) || Response.error(); }}
+    try {{ return await fetch(req); }} catch (err) {{ return Response.error(); }}
   }})());
 }});
 """
